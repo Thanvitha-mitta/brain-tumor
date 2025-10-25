@@ -38,7 +38,7 @@ brain-tumor/
 
 ```powershell
 # Create virtual environment
-python -m venv venv
+python -m venv .venv
 
 # Allow script execution (Windows only)
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
