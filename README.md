@@ -44,7 +44,7 @@ python -m venv venv
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
 
 # Activate environment
-.env\Scripts\Activate.ps1
+.venv\Scripts\Activate.ps1
 ```
 
 ---
