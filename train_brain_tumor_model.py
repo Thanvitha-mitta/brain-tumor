@@ -7,8 +7,9 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropou
 IMG_SIZE = (150, 150)
 
 # Paths to your dataset
-train_dir = r'C:\Users\THANVITHA\Downloads\BrainTumorDatasetKaggle(MultiClass)\Training'
-test_dir = r'C:\Users\THANVITHA\Downloads\BrainTumorDatasetKaggle(MultiClass)\Testing'
+train_dir = r'C:\Users\THANVITHA\Downloads\BrainTumorDataset\Training'
+test_dir = r'C:\Users\THANVITHA\Downloads\BrainTumorDataset\Testing'
+
 
 # Load and preprocess data
 train_datagen = ImageDataGenerator(rescale=1./255)

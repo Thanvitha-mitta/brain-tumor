@@ -5,8 +5,8 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 IMG_SIZE = (150, 150)
 
 # Path to your dataset
-train_dir = r'C:\Users\THANVITHA\Downloads\BrainTumorDatasetKaggle(MultiClass)\Training'
-test_dir = r'C:\Users\THANVITHA\Downloads\BrainTumorDatasetKaggle(MultiClass)\Testing'
+train_dir = r'C:\Users\THANVITHA\Downloads\BrainTumorDataset\Training'
+test_dir = r'C:\Users\THANVITHA\Downloads\BrainTumorDataset\Testing'
 
 # Create ImageDataGenerators for training and testing datasets
 train_datagen = ImageDataGenerator(rescale=1./255)  # Rescale pixel values to [0, 1]
