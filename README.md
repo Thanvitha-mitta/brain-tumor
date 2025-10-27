@@ -1,171 +1,230 @@
-# 🧠 Brain Tumor Classification with Explainable AI (Streamlit)
+# 🧠 Brain Tumor Detection System
 
-A deep learning web application that classifies brain MRI images into four tumor types — **glioma**, **meningioma**, **pituitary**, and **no tumor** — using a pre-trained **CNN model**.  
-It also provides **Grad-CAM visualizations** for explainability and generates **personalized PDF reports**.
+A comprehensive deep learning system for detecting and classifying brain tumors from MRI scans using Convolutional Neural Networks (CNN). The system can identify four different conditions: Glioma, Meningioma, Pituitary Tumor, and No Tumor.
 
----
+## 🌟 Features
 
-## 🚀 Features
+- **Multi-class Classification**: Detects 4 different brain conditions
+- **Interactive Web Interface**: User-friendly Streamlit application
+- **Grad-CAM Visualization**: Explainable AI with heatmap overlays
+- **PDF Report Generation**: Professional medical reports with QR codes
+- **Real-time Predictions**: Fast inference with confidence scores
+- **Model Training Pipeline**: Complete training and evaluation setup
 
-- 🧩 Multi-class brain tumor classification  
-- 🌈 Explainable AI with Grad-CAM visualizations  
-- 🖥️ Interactive, modern web interface using Streamlit  
-- 🧾 Downloadable prediction reports in PDF  
-- 🎉 Celebration animation for **No Tumor** results  
-- ⚡ Lightweight, fast, and easy to use  
+## 📊 Dataset
 
----
+The system is trained on a comprehensive brain MRI dataset with the following structure:
 
-## 🗂️ Project Structure
 ```
-brain-tumor/
-├── dataset/
-│   ├── Training/              # Training dataset
-│   └── Testing/               # Testing dataset
-├── brain_tumor_app.py         # Streamlit web app
-├── train_brain_tumor_model.py # Model training script
-├── grad_cam_utils.py          # Grad-CAM utility (optional)
-├── brain_tumor_model.h5       # Pre-trained CNN model
-├── requirements.txt           # Dependencies list
-└── README.md                  # Project documentation
-```
-
----
-
-## ⚙️ Setup Instructions
-
-### 1️⃣ Create and activate a virtual environment
-
-```powershell
-# Create virtual environment
-python -m venv .venv
-
-# Allow script execution (Windows only)
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
-
-# Activate environment
-.venv\Scripts\Activate.ps1
+dataset/
+├── Training/
+│   ├── glioma/        (1,321 images)
+│   ├── meningioma/    (1,339 images)
+│   ├── notumor/       (1,595 images)
+│   └── pituitary/     (1,457 images)
+└── Testing/
+    ├── glioma/        (300 images)
+    ├── meningioma/    (306 images)
+    ├── notumor/       (405 images)
+    └── pituitary/     (300 images)
 ```
 
----
-
-### 2️⃣ Install dependencies
-
-```powershell
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-If you don’t have `requirements.txt`, install manually:
-
-```bash
-pip install streamlit tensorflow opencv-python pillow matplotlib numpy reportlab
-```
-
----
-
-## ▶️ Running the App
-
-```powershell
-streamlit run brain_tumor_app.py
-```
-
-Then open the provided local URL (usually `http://localhost:8501`) in your browser.
-
----
-
-## 🧠 How to Use
-
-1. Upload an **MRI image** (`.jpg`, `.jpeg`, or `.png`)  
-2. Click **🔍 Predict**  
-3. The app will:
-   - 🧠 Predict the tumor type  
-   - 📊 Show the confidence score  
-   - 🔥 Display a **Grad-CAM heatmap**  
-4. You can also **download a PDF report** of the prediction.
-
-> 💥 If **no tumor** is detected, the app displays a 🎉 **party popper animation** to celebrate good news!
-
----
+**Total Dataset**: ~7,000+ brain MRI images across 4 classes
 
 ## 🏗️ Model Architecture
 
-- **Input size:** 150×150×3 RGB  
-- **Layers:**
-  - 3× Convolution + ReLU + MaxPooling  
-  - Dropout for regularization  
-  - Dense layers for classification  
-- **Output:** 4 classes  
-  (`glioma`, `meningioma`, `no tumor`, `pituitary`)
+The CNN model consists of:
 
----
+- **Input Layer**: 150x150x3 RGB images
+- **Convolutional Layers**:
+  - Conv2D(32) → MaxPooling2D
+  - Conv2D(64) → MaxPooling2D
+  - Conv2D(128) → MaxPooling2D
+- **Dense Layers**:
+  - Dense(128) with ReLU activation
+  - Dropout(0.5) for regularization
+  - Dense(4) with Softmax activation (4 classes)
 
-## 🧩 Explainability with Grad-CAM
+## 🚀 Quick Start
 
-The application uses **Gradient-weighted Class Activation Mapping (Grad-CAM)** to visualize which regions of the MRI influenced the model’s decision.  
-This improves **trust and interpretability** in medical AI systems.
+### Prerequisites
 
----
+- Python 3.7+
+- Virtual environment (recommended)
 
-## 📄 Example Output
+### Installation
 
-| MRI Image                 | Grad-CAM Heatmap                | Prediction | Confidence |
-| -------------------------- | ------------------------------- | ----------- | ----------- |
-| ![MRI](example_input.jpg) | ![GradCAM](example_heatmap.jpg) | Glioma      | 97.8%       |
+1. **Clone the repository**
 
----
+   ```bash
+   git clone "https://github.com/Thanvitha-mitta/brain-tumor"
+   cd brain-tumor
+   ```
 
-## ⚠️ Troubleshooting
+2. **Create and activate virtual environment**
 
-### 🧩 TensorFlow not installing?
+   ```bash
+   python -m venv venv
 
-- Use Python **3.8–3.11**
-- Run:
-  ```bash
-  pip install --upgrade pip
-  ```
-- For CPU-only:
-  ```bash
-  pip install tensorflow-cpu
-  ```
+   # Windows
+   venv\Scripts\activate
 
-### 📦 ReportLab not found?
+   # macOS/Linux
+   source venv/bin/activate
+   ```
 
-If you see:
-```
-ModuleNotFoundError: No module named 'reportlab'
-```
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Run:
-```bash
-pip install reportlab
-```
+### Download the dataset in /dataset
 
-### 🧠 Model file missing?
+Link of dataset -> https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
 
-Ensure `brain_tumor_model.h5` exists in the same directory as `brain_tumor_app.py`.  
-If not, retrain it using:
+### Train the Model
+
 ```bash
 python train_brain_tumor_model.py
 ```
 
+NOTE - .h5 file will be created here
+
+### Predict the Model
+
+```bash
+python predict_brain_tumor.py
+```
+
+Specify the path of the MRI image for detection of brain tumor
+
+### Running the Application
+
+1. **Launch the Streamlit app**
+
+   ```bash
+   streamlit run new_brain_tumor_app.py
+   ```
+
+2. **Open your browser** and navigate to `http://localhost:8501`
+
+3. **Upload an MRI image** and click "Analyze MRI" to get predictions
+
+## 📁 Project Structure
+
+```
+brain-tumor/
+├── brain_tumor_app.py          # Main Streamlit application
+├── train_brain_tumor_model.py  # Model training script
+├── predict_brain_tumor.py      # Standalone prediction script
+├── brain_tumor_model.h5        # Trained model weights
+├── requirements.txt            # Python dependencies
+├── README.md                   # This file
+├── dataset/                    # Training and testing data
+│   ├── Training/
+│   └── Testing/
+└── venv/                       # Virtual environment
+```
+
+## 🔧 Usage
+
+### Web Application
+
+1. **Upload**: Select a brain MRI image (JPG, JPEG, PNG)
+2. **Analyze**: Click "Analyze MRI" to process the image
+3. **View Results**:
+   - **Home**: See prediction with confidence scores
+   - **Grad-CAM**: Visualize model attention with heatmaps
+   - **Download Report**: Generate PDF medical reports
+
+### Command Line Prediction
+
+```bash
+python predict_brain_tumor.py
+# Enter the full path to your MRI image when prompted
+```
+
+### Training New Models
+
+```bash
+python train_brain_tumor_model.py
+```
+
+## 🎯 Model Performance
+
+The trained model achieves high accuracy on the test dataset with the following capabilities:
+
+- **Classification**: 4-class brain tumor detection
+- **Confidence Scoring**: Probability distribution across all classes
+- **Visualization**: Grad-CAM heatmaps for model interpretability
+- **Report Generation**: Professional PDF reports for medical documentation
+
+## 🔍 Grad-CAM Visualization
+
+The application includes Grad-CAM (Gradient-weighted Class Activation Mapping) to provide visual explanations of the model's decision-making process:
+
+- **Heatmap Overlay**: Shows which regions the model focuses on
+- **Adjustable Intensity**: Control overlay transparency
+- **Medical Interpretability**: Helps understand model predictions
+
+## 📄 PDF Report Features
+
+Generated reports include:
+
+- **Cover Page**: Professional header with timestamp
+- **Image Analysis**: Original MRI and Grad-CAM overlay side-by-side
+- **Prediction Summary**: Class prediction with confidence scores
+- **Confidence Breakdown**: Detailed probability distribution
+- **Medical Notes**: Disclaimers and recommendations
+- **QR Code**: Unique report identifier
+
+## 🛠️ Dependencies
+
+- **TensorFlow**: Deep learning framework
+- **Streamlit**: Web application framework
+- **OpenCV**: Image processing
+- **PIL/Pillow**: Image manipulation
+- **Plotly**: Interactive visualizations
+- **ReportLab**: PDF generation
+- **NumPy**: Numerical computations
+- **Matplotlib**: Plotting and visualization
+
+## ⚠️ Important Disclaimers
+
+- **Medical Disclaimer**: This tool is for research and educational purposes only
+- **Not for Clinical Use**: Always consult qualified medical professionals for actual diagnoses
+- **Model Limitations**: AI models may have biases and limitations
+- **Data Privacy**: Ensure patient data privacy when using this system
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Brain MRI dataset contributors
+- TensorFlow and Keras communities
+- Streamlit for the excellent web framework
+- Medical imaging research community
+
+## 📞 Support
+
+For questions, issues, or contributions, please:
+
+1. Check existing issues in the repository
+2. Create a new issue with detailed description
+3. Contact the maintainers
+
 ---
 
-## 🧰 Dependencies
-
-- Streamlit  
-- TensorFlow / Keras  
-- OpenCV  
-- NumPy  
-- Pillow  
-- Matplotlib  
-- ReportLab  
+**Remember**: This is a research tool. Always consult medical professionals for clinical decisions! 🏥
 
 
-## 🌟 Acknowledgments
-
-- MRI datasets from **Kaggle Brain Tumor Dataset**  
-- TensorFlow & Keras open-source frameworks  
-- Streamlit community for interactive UI tools  
-
----
