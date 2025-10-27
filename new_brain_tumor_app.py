@@ -19,7 +19,7 @@ import qrcode
 
 # ------------------ CONFIG ------------------
 st.set_page_config(
-    page_title="Brain Tumor Classifier",
+    page_title="Brain Tumor Diagnosis with XAI",
     page_icon="🧠",
     layout="centered"
 )
@@ -209,7 +209,7 @@ def generate_pdf(pred_label, conf, overlay_rgb, img_pil=None, preds=None):
 
 # ------------------ APP UI ------------------
 st.markdown(
-    "<h1 style='text-align:center; color:#1E88E5;'>🧠 Brain Tumor Classifier</h1>"
+    "<h1 style='text-align:center; color:#1E88E5;'>🧠 Brain Tumor Diagnosis with XAI</h1>"
     "<p style='text-align:center; font-size:16px;'>Upload a brain MRI and get predictions with explainability.</p>",
     unsafe_allow_html=True
 )

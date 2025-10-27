@@ -1,0 +1,23 @@
+# Ignore virtual environment
+.venv/
+
+# Ignore evaluation results
+brain-tumor/evaluation_results/
+
+# Ignore model weight files
+brain-tumor/*.h5
+
+# Ignore compressed or archive files
+brain-tumor/*.zip
+
+# Ignore training and testing datasets
+brain-tumor/Training/
+brain-tumor/Testing/
+
+# Common Python ignore patterns
+__pycache__/
+*.py[cod]
+*.log
+*.tmp
+.ipynb_checkpoints/
+.env
